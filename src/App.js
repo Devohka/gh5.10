@@ -3,17 +3,31 @@ import { Component } from 'react';
 import './App.css';
 
 
+
+
 console.log(localStorage.getItem("tellBook"));
 class App extends Component {
+
+  saveItem = () => {
+    localStorage.setItem("tellBook", JSON.stringify([
+        { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
+        { id: 2, name: 'Hermione Kline', number: '443-89-12' },
+        { id: 3, name: 'Eden Clements', number: '645-17-79' },
+        { id: 4, name: 'Annie Copeland', number: '227-91-26' },
+      ]));
+  };
+
+  
+
 
   state = {
     tellBook: JSON.parse(localStorage.getItem("tellBook")),
     // tellBook: [
-    //       { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
-    //       { id: 2, name: 'Hermione Kline', number: '443-89-12' },
-    //       { id: 3, name: 'Eden Clements', number: '645-17-79' },
-    //       { id: 4, name: 'Annie Copeland', number: '227-91-26' },
-    //     ],
+        //   { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
+        //   { id: 2, name: 'Hermione Kline', number: '443-89-12' },
+        //   { id: 3, name: 'Eden Clements', number: '645-17-79' },
+        //   { id: 4, name: 'Annie Copeland', number: '227-91-26' },
+        // ],
     filter: '',
     name: '',
     number: ''
@@ -24,7 +38,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    
     this.save = setInterval(() => {
   
         localStorage.setItem("tellBook", JSON.stringify(this.state.tellBook));
@@ -95,6 +108,7 @@ class App extends Component {
 
   
   render() {
+    this.saveItem();
     const { tellBook } = this.state;
     console.log(tellBook);
     return (
