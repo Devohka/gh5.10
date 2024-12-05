@@ -1,69 +1,94 @@
 import TellBook from './Component/TellBook';
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 
 
 
-console.log(localStorage.getItem("tellBook"));
-class App extends Component {
+function App() {
+  const [isTell, tell] = useState([
+    { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 2, name: 'Hermione Kline', number: '443-89-12' },
+    { id: 3, name: 'Eden Clements', number: '645-17-79' },
+    { id: 4, name: 'Annie Copeland', number: '227-91-26' },
+  ]);
+  
+  localStorage.setItem("tellBook", JSON.stringify(isTell));
 
-  saveItem = () => {
-    localStorage.setItem("tellBook", JSON.stringify([
-        { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
-        { id: 2, name: 'Hermione Kline', number: '443-89-12' },
-        { id: 3, name: 'Eden Clements', number: '645-17-79' },
-        { id: 4, name: 'Annie Copeland', number: '227-91-26' },
-      ]));
-  };
+  console.log(localStorage.getItem("tellBook"));
+
+
+const [isTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tellBook")));
+
+
+
+  // saveItem = () => {
+  //   localStorage.setItem("tellBook", JSON.stringify([
+  //       { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
+  //       { id: 2, name: 'Hermione Kline', number: '443-89-12' },
+  //       { id: 3, name: 'Eden Clements', number: '645-17-79' },
+  //       { id: 4, name: 'Annie Copeland', number: '227-91-26' },
+  //     ]));
+  // };
 
   
 
 
-  state = {
-    tellBook: JSON.parse(localStorage.getItem("tellBook")),
-    // tellBook: [
-        //   { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
-        //   { id: 2, name: 'Hermione Kline', number: '443-89-12' },
-        //   { id: 3, name: 'Eden Clements', number: '645-17-79' },
-        //   { id: 4, name: 'Annie Copeland', number: '227-91-26' },
-        // ],
-    filter: '',
-    name: '',
-    number: ''
-  };
+  // const state = {
+  //   tellBook: JSON.parse(localStorage.getItem("tellBook")),
+  //   // tellBook: [
+  //       //   { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
+  //       //   { id: 2, name: 'Hermione Kline', number: '443-89-12' },
+  //       //   { id: 3, name: 'Eden Clements', number: '645-17-79' },
+  //       //   { id: 4, name: 'Annie Copeland', number: '227-91-26' },
+  //       // ],
+  //   filter: '',
+  //   name: '',
+  //   number: ''
+  // };
 
-  createNumder = () => {
+   const createNumder = () => {
     return Math.round(Math.random() * (9999 - 5) + 5);
   };
 
-  componentDidMount() {
-    this.save = setInterval(() => {
+  // // componentDidMount() {
+  // //   this.save = setInterval(() => {
   
-        localStorage.setItem("tellBook", JSON.stringify(this.state.tellBook));
+  // //       localStorage.setItem("tellBook", JSON.stringify(this.state.tellBook));
+       
+  // //       console.log("save");
+     
+
+  // //   }, 1000);
+
+  // };
+
+  useEffect(() => {
+     setInterval(() => {
+  
+        localStorage.setItem("tellBook", JSON.stringify(isTellBook));
        
         console.log("save");
      
 
     }, 1000);
+  }, [isTellBook]);
 
-  };
 
-
-  deleteContact = (e) => {
+  const deleteContact = (e) => {
     const idToDelete = parseInt(e.target.closest("li")["id"]);
-    const newTellBook = this.state.tellBook.filter(item => {
+    const newTellBook = isTellBook.filter(item => {
 
       return item.id !== idToDelete;
     });
     console.log(idToDelete);
-    newTellBook.splice(idToDelete, 0)
-    this.setState({ tellBook: newTellBook });
+    newTellBook.splice(idToDelete, 0);
+    remTellBook(newTellBook);
   };
 
 
 
-  addNumber = (e) => {
+   const addNumber = (e) => {
     e.preventDefault();
     const event = e.target;
     const contactsName = event.elements.name.value;
@@ -71,15 +96,15 @@ class App extends Component {
     const newContact = {
       name: contactsName,
       number: contactsNumder,
-      id: this.createNumder(),
+      id: createNumder(),
     };
-    this.state.tellBook.find(contact => {
+    isTellBook.find(contact => {
       console.log(contact)
       if (contact.name === newContact.name && contact.number === newContact.number) {
         alert(`${newContact.name} is already in contacts`);
-
+        // break;
       } else {
-        this.setState({ tellBook: [...this.state.tellBook, newContact] });
+        remTellBook([...isTellBook, newContact]);
       };
     });
 
@@ -94,34 +119,34 @@ class App extends Component {
 
   };
 
-  findTellBook = (e) => {
+  const findTellBook = (e) => {
     const valueinput = e.target.value;
-    const findValueTellBook = this.state.tellBook.filter(item => {
+    const findValueTellBook = isTellBook.filter(item => {
       return item.name === valueinput;
     });
     console.log(findValueTellBook);
 
-    this.setState({ tellBook: findValueTellBook });
+    remTellBook(findValueTellBook);
 
 
   };
 
   
-  render() {
-    this.saveItem();
-    const { tellBook } = this.state;
-    console.log(tellBook);
+
+  //   this.saveItem();
+  //   const { tellBook } = this.state;
+  //   console.log(tellBook);
     return (
       <>
         <TellBook
-          addNumber={this.addNumber}
-          findTellBook={this.findTellBook}
-          deleteContact={this.deleteContact}
-          tellBook={this.state.tellBook}
+          addNumber={addNumber}
+          findellBook={findTellBook}
+          deleteContact={deleteContact}
+          tellBook={isTellBook}
         ></TellBook>
       </>
     );
-  };
+  
 
 };
 
