@@ -1,25 +1,46 @@
 import TellBook from './Component/TellBook';
-import { useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 import './App.css';
 
 
 
 
+
+
+// const ThemeContext = createContext(null);
+
+
+
+
+
+// function MyApp() {
+//   return (
+//     < MyApp.Provider value={[
+//       { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
+//       { id: 2, name: 'Hermione Kline', number: '443-89-12' },
+//       { id: 3, name: 'Eden Clements', number: '645-17-79' },
+//       { id: 4, name: 'Annie Copeland', number: '227-91-26' },
+//     ]}>
+//       <App></App>
+//     </MyApp.Provider>
+//   );
+// };
+
 function App() {
   const [isTell, tell] = useState([
-    { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 2, name: 'Hermione Kline', number: '443-89-12' },
-    { id: 3, name: 'Eden Clements', number: '645-17-79' },
-    { id: 4, name: 'Annie Copeland', number: '227-91-26' },
-  ]);
-  
+          { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
+          { id: 2, name: 'Hermione Kline', number: '443-89-12' },
+          { id: 3, name: 'Eden Clements', number: '645-17-79' },
+          { id: 4, name: 'Annie Copeland', number: '227-91-26' },
+        ]);
+
   localStorage.setItem("tellBook", JSON.stringify(isTell));
 
   console.log(localStorage.getItem("tellBook"));
 
 
-const [isTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tellBook")));
-
+  const [isTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tellBook")));
+  // const isTell = useContext(ThemeContext);
 
 
   // saveItem = () => {
@@ -31,8 +52,17 @@ const [isTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tell
   //     ]));
   // };
 
-  
 
+  const deleteContact = (e) => {
+    const idToDelete = parseInt(e.target.closest("li")["id"]);
+    const newTellBook = isTellBook.filter(item => {
+  
+      return item.id !== idToDelete;
+    });
+    console.log(idToDelete);
+    newTellBook.splice(idToDelete, 0);
+    remTellBook(newTellBook);
+  };
 
   // const state = {
   //   tellBook: JSON.parse(localStorage.getItem("tellBook")),
@@ -47,48 +77,35 @@ const [isTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tell
   //   number: ''
   // };
 
-   const createNumder = () => {
+  const createNumder = () => {
     return Math.round(Math.random() * (9999 - 5) + 5);
   };
 
   // // componentDidMount() {
   // //   this.save = setInterval(() => {
-  
+
   // //       localStorage.setItem("tellBook", JSON.stringify(this.state.tellBook));
-       
+
   // //       console.log("save");
-     
+
 
   // //   }, 1000);
 
   // };
 
   useEffect(() => {
-     setInterval(() => {
-  
-        localStorage.setItem("tellBook", JSON.stringify(isTellBook));
-       
-        console.log("save");
-     
+    setInterval(() => {
+
+      localStorage.setItem("tellBook", JSON.stringify(isTellBook));
+
+      console.log("save");
+
 
     }, 1000);
   }, [isTellBook]);
 
 
-  const deleteContact = (e) => {
-    const idToDelete = parseInt(e.target.closest("li")["id"]);
-    const newTellBook = isTellBook.filter(item => {
-
-      return item.id !== idToDelete;
-    });
-    console.log(idToDelete);
-    newTellBook.splice(idToDelete, 0);
-    remTellBook(newTellBook);
-  };
-
-
-
-   const addNumber = (e) => {
+  const addNumber = (e) => {
     e.preventDefault();
     const event = e.target;
     const contactsName = event.elements.name.value;
@@ -131,22 +148,22 @@ const [isTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tell
 
   };
 
-  
+
 
   //   this.saveItem();
   //   const { tellBook } = this.state;
   //   console.log(tellBook);
-    return (
-      <>
-        <TellBook
-          addNumber={addNumber}
-          findellBook={findTellBook}
-          deleteContact={deleteContact}
-          tellBook={isTellBook}
-        ></TellBook>
-      </>
-    );
-  
+  return (
+    <>
+      <TellBook
+        addNumber={addNumber}
+        findellBook={findTellBook}
+        deleteContact={deleteContact}
+        tellBook={isTellBook}
+      ></TellBook>
+    </>
+  );
+
 
 };
 

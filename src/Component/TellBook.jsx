@@ -1,5 +1,8 @@
-import { Component } from 'react';
+// import { Component } from 'react';
 import { styled } from 'styled-components';
+import { useRef } from 'react';
+
+
 
 
 const Text = styled.h2`
@@ -53,63 +56,69 @@ height: 200px;
 
 
 
-function TellBook ({addNumber, findTellBook, deleteContact, tellBook}) {
+function TellBook({ addNumber, findTellBook, deleteContact, tellBook }) {
 
-        //    console.log(...state.tellBook.tellBook);
-        // console.log(createNumder());
-        
-        return (
-            <>
-                <Text>
-                    Phonebook
-                </Text>
+    //    console.log(...state.tellBook.tellBook);
+    // console.log(createNumder());
+    const inputRef = useRef(null);
 
-                <BoxContacts>
-                    <form onSubmit={addNumber}>
-                        <h2>Name</h2>
-                        <input
-                            type="text"
-                            name="name"
-                        />
-                        <h2>Number</h2>
-                        <input
-                            type="tel"
-                            name="number"
-                            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-                            required
-                        />
-                        <button type="submit" >Add Contact</button>
-                    </form>
-                </BoxContacts>
-
-                <Text>
-                    Contacts
-                </Text>
-
-
-                <Text>
-                    Find contacts by name
-                </Text>
-
-                <InputFind onInput={findTellBook} type="text" />
-
-
-                <List>
-                    {tellBook.map(contact => {
-                        return (
-                            <>
-                                <li id={contact.id} key={contact.id}>
-                                    <p>{contact.name}</p>
-                                    <p>{contact.number}</p>
-                                    <button onClick={deleteContact}>Delete</button>
-                                </li>
-                            </>
-                        );
-                    })}
-                </List>
-            </>
-        );
+    function handleClick() {
+        inputRef.current.focus();
     };
+    return (
+        <>
+            <Text>
+                Phonebook
+            </Text>
+
+            <BoxContacts>
+                <form onSubmit={addNumber}>
+                    <h2>Name</h2>
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        name="name"
+                    />
+                    <h2>Number</h2>
+                    <input
+                        ref={inputRef}
+                        type="tel"
+                        name="number"
+                        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+                        required
+                    />
+                    <button type="submit" onClick={handleClick}>Add Contact</button>
+                </form>
+            </BoxContacts>
+
+            <Text>
+                Contacts
+            </Text>
+
+
+            <Text>
+                Find contacts by name
+            </Text>
+
+            <InputFind onInput={findTellBook} type="text" />
+
+
+            <List>
+                {tellBook.map(contact => {
+                    return (
+                        <>
+                            <li id={contact.id} key={contact.id}>
+                                <p>{contact.name}</p>
+                                <p>{contact.number}</p>
+                                <button onClick={deleteContact}>Delete</button>
+                            </li>
+                        </>
+                    );
+                })}
+            </List>
+        </>
+    );
+};
 
 
 
