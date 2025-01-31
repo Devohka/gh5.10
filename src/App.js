@@ -1,7 +1,7 @@
 import TellBook from './Component/TellBook';
-import { createContext, useState, useEffect, useContext } from 'react';
+// import { createContext, useState, useEffect, useContext } from 'react';
 import './App.css';
-
+import { useSelector, useDispatch } from "react-redux";
 
 
 
@@ -27,19 +27,26 @@ import './App.css';
 // };
 
 function App() {
-  const [isTell, tell] = useState([
-          { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
-          { id: 2, name: 'Hermione Kline', number: '443-89-12' },
-          { id: 3, name: 'Eden Clements', number: '645-17-79' },
-          { id: 4, name: 'Annie Copeland', number: '227-91-26' },
-        ]);
 
-  localStorage.setItem("tellBook", JSON.stringify(isTell));
+  const isTellBook = useSelector((state) => {
+    // console.log(state.tellBooks);
+    return state.books;
+  });
 
-  console.log(localStorage.getItem("tellBook"));
+  const dispatch = useDispatch();
+  // const [isTell, tell] = useState([
+  //         { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
+  //         { id: 2, name: 'Hermione Kline', number: '443-89-12' },
+  //         { id: 3, name: 'Eden Clements', number: '645-17-79' },
+  //         { id: 4, name: 'Annie Copeland', number: '227-91-26' },
+  //       ]);
+
+  // localStorage.setItem("tellBook", JSON.stringify(isTell));
+
+  // console.log(localStorage.getItem("tellBook"));
 
 
-  const [isTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tellBook")));
+  // const [isTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tellBook")));
   // const isTell = useContext(ThemeContext);
 
 
@@ -56,12 +63,13 @@ function App() {
   const deleteContact = (e) => {
     const idToDelete = parseInt(e.target.closest("li")["id"]);
     const newTellBook = isTellBook.filter(item => {
-  
+
       return item.id !== idToDelete;
     });
     console.log(idToDelete);
     newTellBook.splice(idToDelete, 0);
-    remTellBook(newTellBook);
+    dispatch({ type: "DeleteTell", payload: newTellBook })
+    // remTellBook(newTellBook);
   };
 
   // const state = {
@@ -93,16 +101,16 @@ function App() {
 
   // };
 
-  useEffect(() => {
-    setInterval(() => {
+  // useEffect(() => {
+  //   setInterval(() => {
 
-      localStorage.setItem("tellBook", JSON.stringify(isTellBook));
+  //     localStorage.setItem("tellBook", JSON.stringify(isTellBook));
 
-      console.log("save");
+  //     console.log("save");
 
 
-    }, 1000);
-  }, [isTellBook]);
+  //   }, 1000);
+  // }, [isTellBook]);
 
 
   const addNumber = (e) => {
@@ -115,16 +123,8 @@ function App() {
       number: contactsNumder,
       id: createNumder(),
     };
-    isTellBook.find(contact => {
-      console.log(contact)
-      if (contact.name === newContact.name && contact.number === newContact.number) {
-        alert(`${newContact.name} is already in contacts`);
-        // break;
-      } else {
-        remTellBook([...isTellBook, newContact]);
-      };
-    });
 
+    dispatch({ type: "AddTell", payload: newContact });
     // this.setState(
     //     (preven) => {
     //         return {
@@ -143,7 +143,9 @@ function App() {
     });
     console.log(findValueTellBook);
 
-    remTellBook(findValueTellBook);
+
+    dispatch({ type: "FindTell", payload: findValueTellBook });
+    // remTellBook(findValueTellBook);
 
 
   };
