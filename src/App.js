@@ -2,7 +2,7 @@ import TellBook from './Component/TellBook';
 // import { createContext, useState, useEffect, useContext } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from "react-redux";
-
+import {Addtell, Findtell, DeleteTell} from "./redux/slice";
 
 
 
@@ -68,7 +68,7 @@ function App() {
     });
     console.log(idToDelete);
     newTellBook.splice(idToDelete, 0);
-    dispatch({ type: "DeleteTell", payload: newTellBook })
+    dispatch(DeleteTell(newTellBook))
     // remTellBook(newTellBook);
   };
 
@@ -124,7 +124,7 @@ function App() {
       id: createNumder(),
     };
 
-    dispatch({ type: "AddTell", payload: newContact });
+    dispatch(Addtell(newContact));
     // this.setState(
     //     (preven) => {
     //         return {
@@ -144,7 +144,7 @@ function App() {
     console.log(findValueTellBook);
 
 
-    dispatch({ type: "FindTell", payload: findValueTellBook });
+    dispatch(Findtell(findValueTellBook));
     // remTellBook(findValueTellBook);
 
 

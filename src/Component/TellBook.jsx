@@ -100,7 +100,7 @@ function TellBook({ addNumber, findTellBook, deleteContact, tellBook }) {
                 Find contacts by name
             </Text>
 
-            <InputFind onInput={findTellBook} type="text" />
+            <InputFind onInput={findTellBook} type="text"/>
 
 
             <List>
