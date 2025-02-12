@@ -2,7 +2,7 @@ import TellBook from './Component/TellBook';
 // import { createContext, useState, useEffect, useContext } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from "react-redux";
-import {Addtell, Findtell, DeleteTell} from "./redux/slice";
+import {Addtell, Findtell, DeleteTell} from "./redux/actions";
 
 
 

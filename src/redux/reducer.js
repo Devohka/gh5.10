@@ -1,6 +1,12 @@
-import { createSlice, } from "@reduxjs/toolkit";
+
+import { createReducer } from "@reduxjs/toolkit";
 
 
+import {
+  DeleteTell,
+  Addtell,
+  Findtell
+} from "./actions";
 
 
 const state = {
@@ -13,30 +19,26 @@ const state = {
   ]
 };
 
-const bookSlice = createSlice({
-  name: "BookList",
-  initialState: state,
-  reducers: {
-    Addtell(state, action) {
+export const bookReduser = createReducer(state, builder => {
+  builder
+    .addCase(Addtell, (state, action) => {
       return {
         name: "redux",
-        books: [...state.books, action.payload],
-      };
-    },
-    Findtell(state, action) {
-      return {
-        name: "redux",
-        books: action.payload,
-      };
-    },
-    DeleteTell(state, action) {
+        books:[...state.books, action.payload],
+      }
+    })
+    .addCase(DeleteTell, (state, action) => {
       return {
         name: "redux",
         books: action.payload,
-      };
-    }
-  }
-});
+      }
+    })
+    .addCase(Findtell, (state, action) => {
+      return {
+        name: "redux",
+        books: action.payload,
+      }
+    });
 
-export const {Addtell, Findtell, DeleteTell} = bookSlice.actions;
-export const bookReduser = bookSlice.reducer;
+  return state;
+});
