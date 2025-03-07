@@ -29,7 +29,7 @@ import {Addtell, Findtell, DeleteTell} from "./redux/actions";
 
 function App() {
 
-  const isTellBook = useSelector((state) => {
+  const selectTellBook = useSelector((state) => {
     // console.log(state.tellBooks);
     return state.books;
   });
@@ -52,7 +52,7 @@ function App() {
   // console.log(localStorage.getItem("tellBook"));
 
 
-  // const [isTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tellBook")));
+  // const [selectTellBook, remTellBook] = useState(JSON.parse(localStorage.getItem("tellBook")));
   // const isTell = useContext(ThemeContext);
 
 
@@ -68,7 +68,7 @@ function App() {
 
   const deleteContact = (e) => {
     const idToDelete = parseInt(e.target.closest("li")["id"]);
-    const newTellBook = isTellBook.filter(item => {
+    const newTellBook = selectTellBook.filter(item => {
 
       return item.id !== idToDelete;
     });
@@ -110,13 +110,13 @@ function App() {
   // useEffect(() => {
   //   setInterval(() => {
 
-  //     localStorage.setItem("tellBook", JSON.stringify(isTellBook));
+  //     localStorage.setItem("tellBook", JSON.stringify(selectTellBook));
 
   //     console.log("save");
 
 
   //   }, 1000);
-  // }, [isTellBook]);
+  // }, [selectTellBook]);
 
 
   const addNumber = (e) => {
@@ -144,7 +144,7 @@ function App() {
 
   const findTellBook = (e) => {
     const valueinput = e.target.value;
-    const findValueTellBook = isTellBook.filter(item => {
+    const findValueTellBook = selectTellBook.filter(item => {
       return item.name === valueinput;
     });
     console.log(findValueTellBook);
@@ -167,7 +167,7 @@ function App() {
         addNumber={addNumber}
         findellBook={findTellBook}
         deleteContact={deleteContact}
-        tellBook={isTellBook}
+        tellBook={selectTellBook}
       ></TellBook>
     </>
   );
