@@ -8,6 +8,11 @@ export const DeleteTell = createAction("DeleteBook", array => {
     };
 });
 
+// export const FetchTell = createAction("FetchBook", array => {
+//     return {
+//         payload: array,
+//     };
+// });
 
 export const Addtell = createAction("AddBook", array => {
     return {

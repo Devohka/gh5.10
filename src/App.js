@@ -2,9 +2,10 @@ import TellBook from './Component/TellBook';
 // import { createContext, useState, useEffect, useContext } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from "react-redux";
+// import { useEffect } from "react";
 import {Addtell, Findtell, DeleteTell} from "./redux/actions";
 
-
+// import { fetchTasks } from "./redux/operations";
 
 
 // const ThemeContext = createContext(null);
@@ -34,6 +35,11 @@ function App() {
   });
 
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchTasks());
+  // }, [dispatch]);
+
   // const [isTell, tell] = useState([
   //         { id: 1, name: 'Rosie Simpson', number: '459-12-56' },
   //         { id: 2, name: 'Hermione Kline', number: '443-89-12' },
