@@ -1,7 +1,10 @@
 
 import { createReducer } from "@reduxjs/toolkit";
 
-import { fetchTasks } from "./operations";
+import {
+   fetchTasks,
+  //  deleteTasks
+ } from "./operations";
 import {
   DeleteTell,
   Addtell,

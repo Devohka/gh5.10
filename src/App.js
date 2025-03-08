@@ -4,10 +4,11 @@ import './App.css';
 import { useSelector, useDispatch } from "react-redux";
 // import { useEffect } from "react";
 import {Addtell, Findtell, DeleteTell} from "./redux/actions";
-
 // import { fetchTasks } from "./redux/operations";
-
-
+// import {
+//   deleteTasks
+// } from "./redux/operations";
+import {selectorBook}  from "./redux/selectors"
 // const ThemeContext = createContext(null);
 
 
@@ -29,10 +30,7 @@ import {Addtell, Findtell, DeleteTell} from "./redux/actions";
 
 function App() {
 
-  const selectTellBook = useSelector((state) => {
-    // console.log(state.tellBooks);
-    return state.books;
-  });
+  const selectTellBook = useSelector(selectorBook);
 
   const dispatch = useDispatch();
 
@@ -74,7 +72,8 @@ function App() {
     });
     console.log(idToDelete);
     newTellBook.splice(idToDelete, 0);
-    dispatch(DeleteTell(newTellBook))
+    dispatch(DeleteTell(newTellBook));
+    
     // remTellBook(newTellBook);
   };
 

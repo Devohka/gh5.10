@@ -17,6 +17,8 @@ export const fetchTasks = createAsyncThunk(
         }
     }
 
+
+
     // fetch ("https://67b057b5dffcd88a6788f523.mockapi.io/middleware/TellBook")
     // .then(data => data.json())
     // .then(data => {
@@ -27,5 +29,17 @@ export const fetchTasks = createAsyncThunk(
     //     console.log(erorr)
     // })
 );
+
+
+export const deleteTasks = createAsyncThunk(
+    "DeleteBook",
+    async (idToDelete, thunkAPI) => {
+        try {
+            const response = await axios.delete(`/TellBook/${idToDelete}`);
+            return response.data;
+        } catch (e) {
+            console.log(e.message);
+        }
+    });
 
 console.log(fetchTasks())
