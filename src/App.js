@@ -3,12 +3,15 @@ import TellBook from './Component/TellBook';
 import './App.css';
 import { useSelector, useDispatch } from "react-redux";
 // import { useEffect } from "react";
-import {Addtell, Findtell, DeleteTell} from "./redux/actions";
+import { Addtell, Findtell, DeleteTell } from "./redux/actions";
 // import { fetchTasks } from "./redux/operations";
 // import {
 //   deleteTasks
 // } from "./redux/operations";
-import {selectorBook}  from "./redux/selectors"
+import {
+  selectorBook,
+  numberSelector
+} from "./redux/selectors"
 // const ThemeContext = createContext(null);
 
 
@@ -31,6 +34,7 @@ import {selectorBook}  from "./redux/selectors"
 function App() {
 
   const selectTellBook = useSelector(selectorBook);
+  const selectNumber = useSelector(numberSelector);
 
   const dispatch = useDispatch();
 
@@ -73,7 +77,7 @@ function App() {
     console.log(idToDelete);
     newTellBook.splice(idToDelete, 0);
     dispatch(DeleteTell(newTellBook));
-    
+
     // remTellBook(newTellBook);
   };
 
@@ -162,6 +166,7 @@ function App() {
   //   console.log(tellBook);
   return (
     <>
+    <h1>{selectNumber}</h1>
       <TellBook
         addNumber={addNumber}
         findellBook={findTellBook}

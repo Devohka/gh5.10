@@ -15,7 +15,8 @@ import {
 
 const state = {
   name: "redux",
-  books: []
+  books: [],
+  number: 0,
 };
 
 export const bookReduser = createReducer(state, builder => {
@@ -24,24 +25,28 @@ export const bookReduser = createReducer(state, builder => {
       return {
         name: "redux",
         books:[...state.books, action.payload],
+        number: state.number,
       }
     })
     .addCase(DeleteTell, (state, action) => {
       return {
         name: "redux",
         books: action.payload,
+        number: state.number,
       }
     })
     .addCase(fetchTasks.pending, (state, action) => {
       return {
         name: "redux",
         books: action.payload,
+        number: state.number,
       }
     })
     .addCase(Findtell, (state, action) => {
       return {
         name: "redux",
         books: action.payload,
+        number: state.number,
       }
     });
 
