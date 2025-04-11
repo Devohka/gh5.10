@@ -69,6 +69,7 @@ function TellBook({ addNumber, findTellBook, deleteContact, tellBook }) {
     };
     return (
         <>
+       
             <Text>
                 Phonebook
             </Text>

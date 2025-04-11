@@ -13,11 +13,12 @@ import {
   numberSelector
 } from "./redux/selectors"
 // const ThemeContext = createContext(null);
-
-
-
-
-
+import { Route, Routes } from 'react-router-dom';
+import { Navigation } from './Component/Navigations';
+import { BrowserRouter } from 'react-router-dom';
+import Login from './Component/Login';
+import Register from './Component/Register';
+import { Link } from 'react-router-dom';
 // function MyApp() {
 //   return (
 //     < MyApp.Provider value={[
@@ -163,18 +164,52 @@ function App() {
 
   //   this.saveItem();
   //   const { tellBook } = this.state;
-  //   console.log(tellBook);
-  return (
-    <>
-    <h1>{selectNumber}</h1>
-      <TellBook
-        addNumber={addNumber}
-        findellBook={findTellBook}
-        deleteContact={deleteContact}
-        tellBook={selectTellBook}
-      ></TellBook>
-    </>
-  );
+ 
+  return ( //   console.log(tellBook);
+  <BrowserRouter>
+  <Routes>
+    <Route path="/gh5.10/" element={<Navigation />}></Route>
+      <Route
+        path="/gh5.10/register"
+        element={
+          <Register/>
+        }
+      />
+      <Route
+        path="/gh5.10/login"
+        element={
+          <Login/>
+        }
+      />
+      <Route
+        path="/gh5.10/tasks"
+        element={
+          <>
+           <Link to="/gh5.10/">Home</Link>
+            <h1>{selectNumber}</h1>
+            <TellBook
+              addNumber={addNumber}
+              findellBook={findTellBook}
+              deleteContact={deleteContact}
+              tellBook={selectTellBook}
+            ></TellBook>
+          </>
+        }
+      />
+    
+  </Routes>
+  </BrowserRouter>
+  )
+  // return (<>
+  //   <h1>{selectNumber}</h1>
+  //   <TellBook
+  //     addNumber={addNumber}
+  //     findellBook={findTellBook}
+  //     deleteContact={deleteContact}
+  //     tellBook={selectTellBook}
+  //   ></TellBook>
+  // </>
+  // );
 
 
 };

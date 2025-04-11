@@ -25,3 +25,10 @@ export const Findtell = createAction("FindBook", array => {
         payload: array,
     };
 });
+
+
+export const AddUser = createAction("AddUser", name => {
+    return {
+        payload: name,
+    };
+});

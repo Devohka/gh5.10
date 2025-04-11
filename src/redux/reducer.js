@@ -9,7 +9,7 @@ import {
   DeleteTell,
   Addtell,
   Findtell,
-  
+  AddUser
 } from "./actions";
 
 
@@ -17,36 +17,48 @@ const state = {
   name: "redux",
   books: [],
   number: 0,
+  user: ""
 };
 
 export const bookReduser = createReducer(state, builder => {
   builder
     .addCase(Addtell, (state, action) => {
       return {
-        name: "redux",
+        ...state,
+        
         books:[...state.books, action.payload],
-        number: state.number,
+
       }
     })
     .addCase(DeleteTell, (state, action) => {
       return {
-        name: "redux",
+        ...state,
+        
         books: action.payload,
-        number: state.number,
+
       }
     })
     .addCase(fetchTasks.pending, (state, action) => {
       return {
-        name: "redux",
+        ...state,
+        
         books: action.payload,
-        number: state.number,
+
       }
     })
     .addCase(Findtell, (state, action) => {
       return {
-        name: "redux",
+        ...state,
+        
         books: action.payload,
-        number: state.number,
+
+      }
+    }) .addCase(AddUser, (state, action) => {
+      return {
+        ...state,
+        
+        user: action.payload
+
       }
     });
 
