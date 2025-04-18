@@ -6,21 +6,19 @@ export const Navigation = () => {
 
     return (
         <nav>
-            <Link to="/gh5.10/">
-                Home
-            </Link>
-            <Link to="/gh5.10/login">
+
+            <Link to="/gh5.10/login" className='page-link'>
                 Login
             </Link>
-            <Link to="/gh5.10/register">
+            <Link to="/gh5.10/register" className='page-link'>
                 Register
             </Link>
             {user.length > 0 && (
                 <>
-                <Link to="/gh5.10/tasks">
+                <Link to="/gh5.10/tasks" className='page-link open-link'>
                     Tell
                 </Link>
-                <h2>{user}</h2>
+                <h2 className='user-name'>{user}</h2>
                 </>
              )} 
         </nav>

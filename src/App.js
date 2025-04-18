@@ -185,7 +185,7 @@ function App() {
         path="/gh5.10/tasks"
         element={
           <>
-           <Link to="/gh5.10/">Home</Link>
+           <Link to="/gh5.10/" className='page-link'>Home</Link>
             <h1>{selectNumber}</h1>
             <TellBook
               addNumber={addNumber}
